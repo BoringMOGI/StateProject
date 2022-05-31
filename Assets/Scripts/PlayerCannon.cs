@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerCannon : MonoBehaviour
 {
     public Rigidbody2D rigid;
-    public GameObject prefab;
+    public Bullet prefab;
     public Transform bulletPivot;
 
     public float moveSpeed;
     public float rotateSpeed;
 
-    float addForce;
+    public float addForce;
+    public int coin;
 
     private void Update()
     {
@@ -30,10 +31,12 @@ public class PlayerCannon : MonoBehaviour
         // 스페이스바를 땠을 때 프리팹을 생성하고 '내 기준' 오른쪽 방향으로 힘만큼 발사한다.
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            GameObject bullet = Instantiate(prefab, bulletPivot.position, bulletPivot.rotation);
+            Bullet bullet = Instantiate(prefab, bulletPivot.position, bulletPivot.rotation);
             Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
             rigid.AddForce(transform.right * (10f + addForce), ForceMode2D.Impulse);
             addForce = 0.0f;
+
+            bullet.Setup(this);
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -65,5 +68,14 @@ public class PlayerCannon : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void AddCoin(int amount)
+    {
+        coin += amount;
+    }
+    public void DeleteCoin(int amount)
+    {
+        coin -= amount;
     }
 }
