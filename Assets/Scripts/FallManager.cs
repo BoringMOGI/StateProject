@@ -23,6 +23,7 @@ public class FallManager : MonoBehaviour
         }
     }
 
+
     private void CreateFall()
     {
         float x = Random.Range(p1.position.x, p2.position.x);
