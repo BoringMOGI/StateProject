@@ -9,8 +9,14 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed;
     public float jumpPower;
 
+    public  bool isDead;
+
     void Update()
     {
+        // 죽으면 제어를 할 수 없다.
+        if (isDead)
+            return;
+
         Vector2 velocity = rigid.velocity;
         velocity.x = Input.GetAxisRaw("Horizontal") * moveSpeed;
 
@@ -28,4 +34,10 @@ public class PlayerMove : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void OnDead()
+    {
+        isDead = true;
+    }
+
 }
