@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeParticle: {fileID: 68868040995352964, guid: 5ae27f7e320edd84b96b0573b1c97586, type: 3}
+  addScore: 1

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FallObject : MonoBehaviour
 {
     public ParticleSystem explodeParticle;
+    public int addScore;
 
     GameManager manager;
 
@@ -22,18 +23,14 @@ public class FallObject : MonoBehaviour
     {
         // 충돌한 물체에게서 PlayerMove 컴포넌트를 검색한다.
         PlayerMove player = collision.gameObject.GetComponent<PlayerMove>();
-        if(player != null)
+        if (player != null && player.isDead == false)
         {
-            if (player.isDead == false)
-            {
-                Debug.Log("플레이어와 충돌함");
-                manager.GameOver();
-                player.OnDead();
-            }
+            manager.GameOver();
+            player.OnDead();
         }
         else
         {
-            manager.AddScore();
+            manager.AddScore(addScore);
         }
 
         SetParticle();
@@ -43,7 +40,7 @@ public class FallObject : MonoBehaviour
     // 빈 공간으로 떨어졌을 때.
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        manager.AddScore();
+        manager.AddScore(addScore);
         Destroy(gameObject);
     }
 

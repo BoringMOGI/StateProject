@@ -38,6 +38,8 @@ public class PlayerMove : MonoBehaviour
     public void OnDead()
     {
         isDead = true;
+        rigid.freezeRotation = false;
+        rigid.rotation = 15f;
     }
 
 }

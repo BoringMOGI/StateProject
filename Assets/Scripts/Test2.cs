@@ -15,12 +15,38 @@ public class Test2 : MonoBehaviour
     float score = 0;
     float maxScore = 200;
 
+    private void Start()
+    {
+        int[] array = new int[] { 30, 50, 20 , 4};
+        System.Array.Sort(array, (a, b) => {
+
+            if (a < b)
+                return 1;
+            else if (a > b)
+                return -1;
+            else
+                return 0;
+        });
+
+        Debug.Log(string.Join(",", array));
+    }
+
     private void Update()
     {
-        //score = Mathf.MoveTowards(score, maxScore, 10 * Time.deltaTime);
-        score = Mathf.Lerp(score, maxScore, 10f);
+        Vector2 me = new Vector2(0f, 0f);
+        Vector2 target = new Vector2(10f, 0f);
 
-        Debug.Log(score);
+        //transform.position = Vector2.MoveTowards(transform.position, target, 10 * Time.deltaTime);
+        //score = Mathf.MoveTowards(score, maxScore, 50 * Time.deltaTime);
+        //Debug.Log(score);
+
+        transform.position = Vector2.Lerp(transform.position, target, 2f * Time.deltaTime);
+        Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+        if(Vector2.Distance(myPos, target) <= 2f * Time.deltaTime)
+        {
+            Debug.Log("¸ØÃá´Ù.");
+            transform.position = target;
+        }
     }
 
     [ContextMenu("Test Move")]
